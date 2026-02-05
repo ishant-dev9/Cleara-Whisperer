@@ -89,7 +89,7 @@ export default function App() {
                 name="studentClass"
                 value={inputs.studentClass}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white text-gray-900 font-medium"
               >
                 <option value="10">Class 10</option>
                 <option value="11">Class 11</option>
@@ -105,7 +105,7 @@ export default function App() {
                 placeholder="e.g. Physics, Biology..."
                 value={inputs.subject}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white text-gray-900 placeholder-gray-400 font-medium"
               />
             </div>
 
@@ -117,7 +117,7 @@ export default function App() {
                 placeholder="e.g. Thermodynamics..."
                 value={inputs.chapterName}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white text-gray-900 placeholder-gray-400 font-medium"
               />
             </div>
 
@@ -129,7 +129,7 @@ export default function App() {
                 value={inputs.examDate}
                 onChange={handleInputChange}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white text-gray-900 font-medium"
               />
             </div>
 

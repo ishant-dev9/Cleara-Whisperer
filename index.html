@@ -1,45 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Whisperer - Cleara</title>
+    <title>Cleara - Exam Whisperer</title>
+    <!-- Tailwind for styling without build step -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-        .print-only {
-            display: none;
-        }
+        [v-cloak] { display: none; }
+        .no-print { display: block; }
         @media print {
-            .no-print {
-                display: none;
-            }
-            .print-only {
-                display: block;
-            }
-            body {
-                background: white;
-            }
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white !important; }
+        }
+        /* Fix for light text bug */
+        input, select, textarea {
+            color: #111827 !important; /* text-gray-900 */
+            background-color: #ffffff !important;
+            opacity: 1 !important;
+        }
+        input::placeholder {
+            color: #9ca3af !important; /* text-gray-400 */
         }
     </style>
 <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
 </head>
-<body>
-    <div id="root"></div>
+<body class="bg-slate-50 font-['Inter'] text-gray-900 antialiased">
+    <!-- Fallback Content: Visible even if JS fails -->
+    <header class="bg-white border-b sticky top-0 z-50 no-print">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="bg-indigo-600 text-white p-2 rounded-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight">Cleara <span class="text-indigo-600">Whisperer</span></h1>
+            </div>
+            <div class="text-sm font-medium text-gray-500 hidden sm:block">Personal Exam Mentor</div>
+        </div>
+    </header>
+
+    <main id="app-container" class="max-w-5xl mx-auto w-full px-4 py-8 min-h-screen">
+        <!-- Input Form Section -->
+        <section id="form-section" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 no-print">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Plan Your Success</h2>
+                <p class="text-gray-600 mt-1">Enter your exam details to generate a deterministic study strategy.</p>
+            </div>
+
+            <form id="planner-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold text-gray-700">Select Class</label>
+                    <select id="studentClass" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 transition-all outline-none bg-white font-medium">
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold text-gray-700">Subject</label>
+                    <input type="text" id="subject" placeholder="e.g. Physics, Math..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 transition-all outline-none bg-white font-medium">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold text-gray-700">Chapter Name</label>
+                    <input type="text" id="chapterName" placeholder="e.g. Thermodynamics..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 transition-all outline-none bg-white font-medium">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold text-gray-700">Exam Date</label>
+                    <input type="date" id="examDate" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 transition-all outline-none bg-white font-medium">
+                </div>
+
+                <div class="md:col-span-2 pt-4">
+                    <button type="submit" id="submit-btn" class="w-full py-4 px-6 rounded-xl text-white font-bold text-lg bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all active:scale-[0.98]">
+                        Generate Personalized Study Plan
+                    </button>
+                    <div id="error-msg" class="text-red-500 text-sm mt-3 text-center font-medium hidden"></div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Loading State (hidden by default) -->
+        <div id="loading-state" class="hidden py-20 text-center space-y-4">
+            <p class="text-indigo-600 font-bold animate-pulse text-lg">Consulting the Whispers...</p>
+            <p class="text-gray-500 text-sm">Building your custom curriculum based on exam date...</p>
+        </div>
+
+        <!-- Result Container -->
+        <div id="result-container" class="mt-12 hidden">
+            <!-- Results will be injected here via script.js -->
+        </div>
+    </main>
+
+    <footer class="bg-gray-50 border-t py-8 mt-12 no-print">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">© 2024 Cleara Exam Whisperer. Built for student excellence.</p>
+        </div>
+    </footer>
+
+    <!-- Load script at the bottom of the body -->
+    <script src="./script.js" defer></script>
 </body>
 </html>
